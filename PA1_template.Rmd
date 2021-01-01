@@ -4,13 +4,53 @@ output:
   html_document:
     keep_md: true
 ---
+```{r}
+library(ggplot2)
+library(dplyr)
+```
 
 
 ## Loading and preprocessing the data
 
+```{r}
+activity <- read_csv("activity.csv")
+#structure:
+str(activity)
+#data:
+head(activity)
+```
+
+```{r}
+#aggregating data by day:
+day<-aggregate(steps~date,activity,sum)
+head(day)
+```
+
 
 
 ## What is mean total number of steps taken per day?
+
+```{r mean steps}
+mean=mean(day$steps)
+median=median(day$steps)
+
+rbind(mean,median)
+
+```
+
+```{r histogram}
+p1=ggplot(data=day,aes(x=steps))+
+        geom_histogram(bins=30,fill="plum2")+
+        ggtitle("Steps taken per day")
+        
+
+p2=p1+geom_vline(xintercept = mean(day$steps),size=1,
+                 colour="blue",alpha=0.5,linetype="dashed")
+                   
+p3=p2+ annotate(geom = "text",x=mean(day$steps),y = 7.5,label="mean",angle=90)
+
+p3
+```
 
 
 
