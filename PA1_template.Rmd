@@ -7,13 +7,15 @@ output:
 ```{r}
 library(ggplot2)
 library(dplyr)
+library(mice)
+library(lattice)
 ```
 
 
 ## Loading and preprocessing the data
 
 ```{r}
-activity <- read_csv("activity.csv")
+activity <- read.csv("activity.csv")
 #structure:
 str(activity)
 #data:
@@ -28,13 +30,16 @@ head(day)
 
 
 
+
+
+
 ## What is mean total number of steps taken per day?
 
 ```{r mean steps}
-mean=mean(day$steps)
-median=median(day$steps)
+mea=mean(day$steps)
+med=median(day$steps)
 
-rbind(mean,median)
+rbind(mea,med)
 
 ```
 
@@ -55,11 +60,117 @@ p3
 
 
 ## What is the average daily activity pattern?
+```{r}
+#aggregating data by interval:
+inter<-aggregate(steps~interval,activity,mean)
+head(inter)
+```
+
+
+```{r}
+plot(x=inter$interval,y=inter$steps,
+     type = "l",
+     col="red",
+     main = "Average daily activity pattern")
+
+# 5-minute interval that contains the maximum number of steps
+which.max(inter$steps)
+inter[104,]
+#answer
+paste("The interval is 835")
+```
 
 
 
 ## Imputing missing values
+```{r}
+#total missing values:
+sum(is.na(activity))
 
+#with mice package:
+md.pattern(activity,plot=T)
+
+missing<-is.na(activity[,1])
+
+```
+
+-  I will fill in all of the missing values in the dataset by the mean number of steps per interval.
+
+
+```{r}
+#mean number of steps per interval
+m<-mean(inter$steps)
+```
+
+```{r}
+activityfull<-activity
+activityfull[missing,1]<-m
+head(activityfull)
+```
+```{r}
+#aggregating data by day:
+dayfull<-aggregate(steps~date,activityfull,sum)
+head(dayfull)
+```
+```{r}
+mea_full=mean(dayfull$steps)
+med_full=median(dayfull$steps)
+
+rbind(mea_full,med_full)
+
+```
+
+```{r}
+g1=ggplot(data=dayfull,aes(x=steps))+
+        geom_histogram(bins=30,fill="blue")+
+        ggtitle("Steps taken per day")
+        
+g1
+```
+
+
+```{r}
+rbind(mea,mea_full,med,med_full)
+```
+
+
+**Since I imputed the missing values by the mean number of steps per interval, there is no difference in mean before and after imputing, that is not surprising. The median has changed a little bit.**
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
+
+```{r}
+activityfull$date<-as.Date(activityfull$date)
+
+activityfull$days<-weekdays(activityfull$date)
+
+
+
+str(activityfull)
+```
+
+```{r}
+activityfull<-activityfull%>%mutate(daytype=ifelse(days=="samedi"|days=="dimanche", "weekend","weekday"))
+
+activityfull$daytype<-as.factor(activityfull$daytype)
+str(activityfull)
+```
+
+
+```{r}
+#with aggregate:
+agg<-aggregate(steps ~ daytype+interval, data=activityfull, FUN=mean)
+
+xyplot(steps~interval | daytype,
+       data=agg,
+       type="l",
+      main = "Total Number of Steps within Intervals by dayType",
+      xlab = "Daily Intervals",
+      ylab = "Average Number of Steps",
+       layout=c(1,2))
+
+```
+
+
+
+
