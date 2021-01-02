@@ -35,7 +35,7 @@ head(day)
 
 ## What is mean total number of steps taken per day?
 
-```{r mean steps}
+```{r}
 mea=mean(day$steps)
 med=median(day$steps)
 
@@ -43,7 +43,7 @@ rbind(mea,med)
 
 ```
 
-```{r histogram}
+```{r histogram,echo=TRUE}
 p1=ggplot(data=day,aes(x=steps))+
         geom_histogram(bins=30,fill="plum2")+
         ggtitle("Steps taken per day")
@@ -67,7 +67,7 @@ head(inter)
 ```
 
 
-```{r}
+```{r,echo=TRUE}
 plot(x=inter$interval,y=inter$steps,
      type = "l",
      col="red",
@@ -83,7 +83,7 @@ paste("The interval is 835")
 
 
 ## Imputing missing values
-```{r}
+```{r,echo=TRUE}
 #total missing values:
 sum(is.na(activity))
 
@@ -120,7 +120,7 @@ rbind(mea_full,med_full)
 
 ```
 
-```{r}
+```{r,echo=TRUE}
 g1=ggplot(data=dayfull,aes(x=steps))+
         geom_histogram(bins=30,fill="blue")+
         ggtitle("Steps taken per day")
@@ -157,7 +157,7 @@ str(activityfull)
 ```
 
 
-```{r}
+```{r,echo=TRUE}
 #with aggregate:
 agg<-aggregate(steps ~ daytype+interval, data=activityfull, FUN=mean)
 

@@ -128,7 +128,7 @@ plot(x=inter$interval,y=inter$steps,
      main = "Average daily activity pattern")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
 
 ```r
 # 5-minute interval that contains the maximum number of steps
@@ -175,7 +175,7 @@ sum(is.na(activity))
 md.pattern(activity,plot=T)
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
 
 ```
 ##       date interval steps     
@@ -252,7 +252,7 @@ g1=ggplot(data=dayfull,aes(x=steps))+
 g1
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-11-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-12-1.png)<!-- -->
 
 
 
@@ -325,7 +325,7 @@ xyplot(steps~interval | daytype,
        layout=c(1,2))
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-15-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-16-1.png)<!-- -->
 
 
 
