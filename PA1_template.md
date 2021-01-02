@@ -102,7 +102,7 @@ p3=p2+ annotate(geom = "text",x=mean(day$steps),y = 7.5,label="mean",angle=90)
 p3
 ```
 
-![](Figs/histogram-1.png)<!-- -->
+![](Figs/unnamed-chunk-5-1.png)<!-- -->
 
 
 
@@ -133,7 +133,7 @@ plot(x=inter$interval,y=inter$steps,
      main = "Average daily activity pattern")
 ```
 
-![](Figs/unnamed-chunk-6-1.png)<!-- -->
+![](Figs/unnamed-chunk-7-1.png)<!-- -->
 
 ```r
 # 5-minute interval that contains the maximum number of steps
@@ -180,7 +180,7 @@ sum(is.na(activity))
 md.pattern(activity,plot=T)
 ```
 
-![](Figs/unnamed-chunk-7-1.png)<!-- -->
+![](Figs/unnamed-chunk-8-1.png)<!-- -->
 
 ```
 ##       date interval steps     
@@ -257,7 +257,7 @@ g1=ggplot(data=dayfull,aes(x=steps))+
 g1
 ```
 
-![](Figs/unnamed-chunk-12-1.png)<!-- -->
+![](Figs/unnamed-chunk-13-1.png)<!-- -->
 
 
 
@@ -330,7 +330,7 @@ xyplot(steps~interval | daytype,
        layout=c(1,2))
 ```
 
-![](Figs/unnamed-chunk-16-1.png)<!-- -->
+![](Figs/unnamed-chunk-17-1.png)<!-- -->
 
 
 

@@ -47,7 +47,7 @@ rbind(mea,med)
 
 ```
 
-```{r histogram,echo=TRUE}
+```{r}
 p1=ggplot(data=day,aes(x=steps))+
         geom_histogram(bins=30,fill="plum2")+
         ggtitle("Steps taken per day")
@@ -71,7 +71,7 @@ head(inter)
 ```
 
 
-```{r,echo=TRUE}
+```{r}
 plot(x=inter$interval,y=inter$steps,
      type = "l",
      col="red",
@@ -87,7 +87,7 @@ paste("The interval is 835")
 
 
 ## Imputing missing values
-```{r,echo=TRUE}
+```{r}
 #total missing values:
 sum(is.na(activity))
 
@@ -161,7 +161,7 @@ str(activityfull)
 ```
 
 
-```{r,echo=TRUE}
+```{r}
 #with aggregate:
 agg<-aggregate(steps ~ daytype+interval, data=activityfull, FUN=mean)
 
