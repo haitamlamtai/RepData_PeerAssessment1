@@ -6,6 +6,11 @@ output:
 ---
 
 ```r
+knitr::opts_chunk$set(fig.path='Figs/')
+```
+
+
+```r
 library(ggplot2)
 library(dplyr)
 library(mice)
@@ -97,7 +102,7 @@ p3=p2+ annotate(geom = "text",x=mean(day$steps),y = 7.5,label="mean",angle=90)
 p3
 ```
 
-![](PA1_template_files/figure-html/histogram-1.png)<!-- -->
+![](Figs/histogram-1.png)<!-- -->
 
 
 
@@ -128,7 +133,7 @@ plot(x=inter$interval,y=inter$steps,
      main = "Average daily activity pattern")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
+![](Figs/unnamed-chunk-6-1.png)<!-- -->
 
 ```r
 # 5-minute interval that contains the maximum number of steps
@@ -175,7 +180,7 @@ sum(is.na(activity))
 md.pattern(activity,plot=T)
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
+![](Figs/unnamed-chunk-7-1.png)<!-- -->
 
 ```
 ##       date interval steps     
@@ -252,7 +257,7 @@ g1=ggplot(data=dayfull,aes(x=steps))+
 g1
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-12-1.png)<!-- -->
+![](Figs/unnamed-chunk-12-1.png)<!-- -->
 
 
 
@@ -325,7 +330,7 @@ xyplot(steps~interval | daytype,
        layout=c(1,2))
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-16-1.png)<!-- -->
+![](Figs/unnamed-chunk-16-1.png)<!-- -->
 
 
 
